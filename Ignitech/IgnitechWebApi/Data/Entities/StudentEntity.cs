@@ -9,6 +9,11 @@ namespace IgnitechWebApi.Data.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Guid StudentCode { get; set; }
+
+        public virtual ICollection<SubjectEntity> Subjects { get; set; }
+
+        public int TeacherId { get; set; }
+        public virtual TeacherEntity Teacher { get; set; }
     }
 
     public class StudentEntityConfigurationBuilder : IEntityTypeConfiguration<StudentEntity>
@@ -20,6 +25,9 @@ namespace IgnitechWebApi.Data.Entities
             builder.Property(x => x.FirstName).IsRequired();
             builder.Property(x => x.LastName).IsRequired();
             builder.Property(x => x.StudentCode).IsRequired();
+            builder.HasOne(x => x.Teacher)
+                .WithMany(t => t.Students)
+                .HasForeignKey(x => x.TeacherId);
         }
     }
 }

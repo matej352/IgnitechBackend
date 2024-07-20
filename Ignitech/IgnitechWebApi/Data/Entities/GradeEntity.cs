@@ -8,6 +8,10 @@ namespace IgnitechWebApi.Data.Entities
         public int Id { get; set; }
         public int Value { get; set; }
         public DateTime CreatedOn { get; set; }
+
+        public int SubjectId { get; set; }
+
+        public virtual SubjectEntity Subject { get; set; }
     }
 
     public class GradeEntityConfigurationBuilder : IEntityTypeConfiguration<GradeEntity>
@@ -18,6 +22,9 @@ namespace IgnitechWebApi.Data.Entities
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Value).IsRequired();
             builder.Property(x => x.CreatedOn).IsRequired();
+            builder.HasOne(x => x.Subject)
+                .WithMany(s => s.Grades)
+                .HasForeignKey(x => x.SubjectId);
         }
     }
 }

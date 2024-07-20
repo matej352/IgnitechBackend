@@ -9,6 +9,10 @@ namespace IgnitechWebApi.Data.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Guid TeacherCode { get; set; }
+
+        public virtual ICollection<StudentEntity> Students { get; set; }
+
+
     }
 
     public class TeacherEntityConfigurationBuilder : IEntityTypeConfiguration<TeacherEntity>
