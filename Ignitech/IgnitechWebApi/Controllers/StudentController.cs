@@ -16,9 +16,17 @@ namespace IgnitechWebApi.Controllers
             _studentService = studentService;
         }
 
+        [HttpPost]
+        public async Task<ActionResult<CreateStudentDto>> CreateStudent(CreateStudentDto student)
+        {
+            var createdStudent = await _studentService.CreateStudent(student);
+
+            return Ok(createdStudent);
+        }
+
 
         [HttpGet("{teacherCode}")]
-        public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudents(Guid teacherCode)
+        public async Task<ActionResult<IEnumerable<CreateUserDto>>> GetStudents(Guid teacherCode)
         {
             var students = await _studentService.GetStudents(teacherCode);
 

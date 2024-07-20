@@ -8,9 +8,13 @@ namespace IgnitechWebApi.Profiles
     {
         public StudentProfile()
         {
-            CreateMap<StudentDto, StudentEntity>();
+            CreateMap<CreateStudentDto, StudentEntity>();
 
-            CreateMap<StudentEntity, StudentDto>();
+            CreateMap<StudentEntity, CreateStudentDto>();
+
+            CreateMap<StudentEntity, UserDto>();
+
+            CreateMap<UserDto, StudentEntity>();
         }
     }
 }

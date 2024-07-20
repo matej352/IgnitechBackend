@@ -4,6 +4,7 @@ namespace IgnitechWebApi.Services.Student
 {
     public interface IStudentService
     {
-        public Task<IEnumerable<StudentDto>> GetStudents(Guid teacherCode);
+        public Task<UserDto> CreateStudent(CreateStudentDto student);
+        public Task<IEnumerable<CreateUserDto>> GetStudents(Guid teacherCode);
     }
 }

@@ -5,14 +5,19 @@ namespace IgnitechWebApi.Data.Entities
 {
     public class TeacherEntity
     {
+
+
+
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public Guid TeacherCode { get; set; }
+        public virtual ICollection<StudentEntity>? Students { get; set; }
 
-        public virtual ICollection<StudentEntity> Students { get; set; }
-
-
+        public TeacherEntity()
+        {
+            TeacherCode = Guid.NewGuid();
+        }
     }
 
     public class TeacherEntityConfigurationBuilder : IEntityTypeConfiguration<TeacherEntity>
@@ -21,6 +26,7 @@ namespace IgnitechWebApi.Data.Entities
         {
             builder.ToTable("Teacher");
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id);
             builder.Property(x => x.FirstName).IsRequired();
             builder.Property(x => x.LastName).IsRequired();
             builder.Property(x => x.TeacherCode).IsRequired();

@@ -10,7 +10,6 @@ namespace IgnitechWebApi.Data.Entities
         public DateTime CreatedOn { get; set; }
 
         public int SubjectId { get; set; }
-
         public virtual SubjectEntity Subject { get; set; }
     }
 
