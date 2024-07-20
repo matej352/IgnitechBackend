@@ -17,8 +17,9 @@ namespace IgnitechWebApi.Controllers
         }
 
 
+        // Method 5
         [HttpGet("student/{studentId}/subject/{subjectId}")]
-        public async Task<ActionResult<UserDto>> GetGrades(int studentId, int subjectId)
+        public async Task<ActionResult<IEnumerable<GradeDto>>> GetGrades(int studentId, int subjectId)
         {
             var grades = await _gradeService.GetGrades(studentId, subjectId);
 

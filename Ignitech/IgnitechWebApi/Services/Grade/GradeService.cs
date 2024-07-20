@@ -20,14 +20,20 @@ namespace IgnitechWebApi.Services.Grade
 
         public async Task<double> CalculateAvgGrade(int studentId, int subjectId)
         {
-            throw new NotImplementedException();
+            var grades = await _context.Grades
+               .Include(g => g.Subject)
+               .Where(g => g.SubjectId == subjectId && g.Subject.StudentId == studentId)
+               .ToListAsync();
+
+            return grades.Average(g => g.Value);
+
         }
 
         public async Task<IEnumerable<GradeDto>> GetGrades(int studentId, int subjectId)
         {
             var grades = await _context.Grades
                 .Include(g => g.Subject)
-                .Where(g => g.Subject.StudentId == studentId && g.Subject.StudentId == studentId)
+                .Where(g => g.SubjectId == subjectId && g.Subject.StudentId == studentId)
                 .ToListAsync();
 
             return _mapper.Map<List<GradeDto>>(grades);

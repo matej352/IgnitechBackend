@@ -28,9 +28,21 @@ namespace IgnitechWebApi.Services.Teacher
             return _mapper.Map<UserDto>(teacherEntity);
         }
 
-        public Task<UserDto> GetTeacher(int studentId, int subjectId)
+        public async Task<UserDto> GetTeacher(int studentId, int subjectId)
         {
-            throw new NotImplementedException();
+            var subject = await _context.Subjects
+                .Include(s => s.Teacher)
+              .Where(s => s.StudentId == studentId && s.Id == subjectId)
+              .FirstOrDefaultAsync();
+
+            if (subject is not null)
+            {
+                var teacher = subject.Teacher;
+                return _mapper.Map<UserDto>(teacher);
+            } else
+            {
+                return null;
+            }
         }
 
         public async Task<IEnumerable<UserDto>> GetTeachers()

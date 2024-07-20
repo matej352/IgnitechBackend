@@ -25,6 +25,7 @@ namespace IgnitechWebApi.Controllers
         }
 
 
+        // Method 1
         [HttpGet("{teacherId}")]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetStudents(int teacherId)
         {

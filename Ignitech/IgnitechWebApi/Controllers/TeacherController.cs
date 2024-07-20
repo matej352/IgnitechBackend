@@ -33,6 +33,7 @@ namespace IgnitechWebApi.Controllers
             return Ok(teachers);
         }
 
+        // Method 4
         [HttpGet("student/{studentId}/subject/{subjectId}")]
         public async Task<ActionResult<UserDto>> GetTeacher(int studentId, int subjectId)
         {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IgnitechWebApi.Data;
 using IgnitechWebApi.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace IgnitechWebApi.Services.Subject
 {
@@ -15,14 +16,22 @@ namespace IgnitechWebApi.Services.Subject
             _mapper = mapper;
         }
 
-        public Task<IEnumerable<SubjectDto>> GetStudentsSubjects(int studentId)
+        public async Task<IEnumerable<SubjectDto>> GetStudentsSubjects(int studentId)
         {
-            throw new NotImplementedException();
+            var subjects = await _context.Subjects
+               .Where(s => s.StudentId == studentId)
+               .ToListAsync();
+
+            return _mapper.Map<List<SubjectDto>>(subjects);
         }
 
-        public Task<IEnumerable<SubjectDto>> GetTeachersSubjects(int teacherId)
+        public async Task<IEnumerable<SubjectDto>> GetTeachersSubjects(int teacherId)
         {
-            throw new NotImplementedException();
+            var subjects = await _context.Subjects
+               .Where(s => s.TeacherId == teacherId)
+               .ToListAsync();
+
+            return _mapper.Map<List<SubjectDto>>(subjects);
         }
     }
 }

@@ -18,16 +18,18 @@ namespace IgnitechWebApi.Controllers
             _subjectService = subjectService;
         }
 
-        [HttpGet("{teacherId}")]
-        public async Task<ActionResult<CreateStudentDto>> GetTeachersSubjects(int teacherId)
+        // Method 2
+        [HttpGet("fromTeacher/{teacherId}")]
+        public async Task<ActionResult<IEnumerable<SubjectDto>>> GetTeachersSubjects(int teacherId)
         {
             var subjects = await _subjectService.GetTeachersSubjects(teacherId);
 
             return Ok(subjects);
         }
 
-        [HttpGet("{studentId}")]
-        public async Task<ActionResult<CreateStudentDto>> GetStudentsSubjects(int studentId)
+        // Method 3
+        [HttpGet("fromStudent/{studentId}")]
+        public async Task<ActionResult<IEnumerable<SubjectDto>>> GetStudentsSubjects(int studentId)
         {
             var subjects = await _subjectService.GetStudentsSubjects(studentId);
 
