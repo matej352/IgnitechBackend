@@ -32,5 +32,11 @@ namespace IgnitechWebApi.Services.Student
             var students = await _context.Students.Where(s => s.TeacherId == teacherId).ToListAsync();
             return _mapper.Map<List<UserDto>>(students);
         }
+
+        public async Task<IEnumerable<UserDto>> GetStudents()
+        {
+            var students = await _context.Students.ToListAsync();
+            return _mapper.Map<List<UserDto>>(students);
+        }
     }
 }

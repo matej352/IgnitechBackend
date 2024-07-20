@@ -19,6 +19,7 @@ namespace IgnitechWebApi.Services.Subject
         public async Task<IEnumerable<SubjectDto>> GetStudentsSubjects(int studentId)
         {
             var subjects = await _context.Subjects
+               .Include(s => s.Student)
                .Where(s => s.StudentId == studentId)
                .ToListAsync();
 
@@ -28,6 +29,7 @@ namespace IgnitechWebApi.Services.Subject
         public async Task<IEnumerable<SubjectDto>> GetTeachersSubjects(int teacherId)
         {
             var subjects = await _context.Subjects
+               .Include(s => s.Student)
                .Where(s => s.TeacherId == teacherId)
                .ToListAsync();
 

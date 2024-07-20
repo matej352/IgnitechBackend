@@ -25,7 +25,13 @@ namespace IgnitechWebApi.Services.Grade
                .Where(g => g.SubjectId == subjectId && g.Subject.StudentId == studentId)
                .ToListAsync();
 
-            return grades.Average(g => g.Value);
+            if (grades.Any())
+            {
+                return grades.Average(g => g.Value);
+            } else
+            {
+                return 0;
+            }
 
         }
 

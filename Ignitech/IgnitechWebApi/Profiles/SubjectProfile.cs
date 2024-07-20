@@ -10,7 +10,8 @@ namespace IgnitechWebApi.Profiles
         {
             CreateMap<SubjectDto, SubjectEntity>();
 
-            CreateMap<SubjectEntity, SubjectDto>();
+            CreateMap<SubjectEntity, SubjectDto>()
+                .ForMember(dest => dest.StudentName, opt => opt.MapFrom(src => src.Student.FirstName + " " + src.Student.LastName));
         }
     }
 }
