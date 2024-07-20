@@ -29,7 +29,7 @@ namespace IgnitechWebApi.Data.Entities
             builder.HasData(
                 new GradeEntity
                 {
-                    Id = -1,
+                    Id = -1,        // Negative values because when new entities will be added through app, they will have autoincremented Ids starting from 1
                     Value = 3,
                     CreatedOn = DateTime.UtcNow.AddDays(-2),
                     SubjectId = -1
