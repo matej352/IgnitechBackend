@@ -33,6 +33,26 @@ namespace IgnitechWebApi.Data.Entities
             builder.HasOne(x => x.Teacher)
                 .WithMany(t => t.Students)
                 .HasForeignKey(x => x.TeacherId);
+
+            // Seed data
+            builder.HasData(
+                new StudentEntity
+                {
+                    Id = -1,
+                    FirstName = "John",
+                    LastName = "Doe",
+                    TeacherId = -1,
+                    StudentCode = Guid.NewGuid()
+                },
+                new StudentEntity
+                {
+                    Id = -2,
+                    FirstName = "Jane",
+                    LastName = "Doe",
+                    TeacherId = -1,
+                    StudentCode = Guid.NewGuid()
+                }
+            );
         }
     }
 }

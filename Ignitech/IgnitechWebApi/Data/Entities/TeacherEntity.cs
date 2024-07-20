@@ -14,6 +14,8 @@ namespace IgnitechWebApi.Data.Entities
         public Guid TeacherCode { get; set; }
         public virtual ICollection<StudentEntity>? Students { get; set; }
 
+        public virtual ICollection<SubjectEntity>? Subjects { get; set; }
+
         public TeacherEntity()
         {
             TeacherCode = Guid.NewGuid();
@@ -30,6 +32,24 @@ namespace IgnitechWebApi.Data.Entities
             builder.Property(x => x.FirstName).IsRequired();
             builder.Property(x => x.LastName).IsRequired();
             builder.Property(x => x.TeacherCode).IsRequired();
+
+            // Seed data
+            builder.HasData(
+                new TeacherEntity
+                {
+                    Id = -1,
+                    FirstName = "Luka",
+                    LastName = "Modrić",
+                    TeacherCode = Guid.NewGuid()
+                },
+                new TeacherEntity
+                {
+                    Id = -2,
+                    FirstName = "Joško",
+                    LastName = "Gvardiol",
+                    TeacherCode = Guid.NewGuid()
+                }
+            );
         }
     }
 }

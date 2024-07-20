@@ -13,6 +13,11 @@ namespace IgnitechWebApi.Data.Entities
 
         public virtual StudentEntity Student { get; set; }
 
+
+        public int TeacherId { get; set; }
+
+        public virtual TeacherEntity Teacher { get; set; }
+
     }
 
     public class SubjectEntityConfigurationBuilder : IEntityTypeConfiguration<SubjectEntity>
@@ -25,6 +30,48 @@ namespace IgnitechWebApi.Data.Entities
             builder.HasOne(x => x.Student)
                 .WithMany(s => s.Subjects)
                 .HasForeignKey(x => x.StudentId);
+            builder.HasOne(x => x.Teacher)
+                .WithMany(t => t.Subjects)
+                .HasForeignKey(x => x.TeacherId);
+
+            // Seed data
+            builder.HasData(
+                new SubjectEntity
+                {
+                    Id = -1,
+                    Name = "Matematička analiza 1",
+                    StudentId = -1,
+                    TeacherId = -1
+                },
+                new SubjectEntity
+                {
+                    Id = -2,
+                    Name = "Matematička analiza 1",
+                    StudentId = -2,
+                    TeacherId = -1
+                },
+                new SubjectEntity
+                {
+                    Id = -3,
+                    Name = "Fizika",
+                    StudentId = -1,
+                    TeacherId = -1
+                },
+                new SubjectEntity
+                {
+                    Id = -4,
+                    Name = "Osnove elektrotehnike",
+                    StudentId = -2,
+                    TeacherId = -1
+                },
+                new SubjectEntity
+                {
+                    Id = -5,
+                    Name = "Uvod u programiranje",
+                    StudentId = -2,
+                    TeacherId = -2
+                }
+            );
         }
     }
 }

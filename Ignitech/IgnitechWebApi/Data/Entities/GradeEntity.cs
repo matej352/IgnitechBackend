@@ -24,6 +24,52 @@ namespace IgnitechWebApi.Data.Entities
             builder.HasOne(x => x.Subject)
                 .WithMany(s => s.Grades)
                 .HasForeignKey(x => x.SubjectId);
+
+            // Seed data
+            builder.HasData(
+                new GradeEntity
+                {
+                    Id = -1,
+                    Value = 3,
+                    CreatedOn = DateTime.UtcNow.AddDays(-2),
+                    SubjectId = -1
+                },
+                new GradeEntity
+                {
+                    Id = -2,
+                    Value = 5,
+                    CreatedOn = DateTime.UtcNow.AddDays(-2),
+                    SubjectId = -1
+                },
+                new GradeEntity
+                {
+                    Id = -3,
+                    Value = 2,
+                    CreatedOn = DateTime.UtcNow.AddDays(-2),
+                    SubjectId = -2
+                },
+                new GradeEntity
+                {
+                    Id = -4,
+                    Value = 4,
+                    CreatedOn = DateTime.UtcNow.AddDays(-1),
+                    SubjectId = -2
+                },
+                new GradeEntity
+                {
+                    Id = -5,
+                    Value = 1,
+                    CreatedOn = DateTime.UtcNow.AddDays(-1),
+                    SubjectId = -3
+                },
+                new GradeEntity
+                {
+                    Id = -6,
+                    Value = 5,
+                    CreatedOn = DateTime.UtcNow.AddDays(-1),
+                    SubjectId = -3
+                }
+            );
         }
     }
 }

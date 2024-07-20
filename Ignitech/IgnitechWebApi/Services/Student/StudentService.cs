@@ -2,6 +2,7 @@
 using IgnitechWebApi.Data;
 using IgnitechWebApi.Data.Entities;
 using IgnitechWebApi.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace IgnitechWebApi.Services.Student
 {
@@ -26,9 +27,10 @@ namespace IgnitechWebApi.Services.Student
             return _mapper.Map<UserDto>(studentEntity);
         }
 
-        public Task<IEnumerable<CreateUserDto>> GetStudents(Guid teacherCode)
+        public async Task<IEnumerable<UserDto>> GetStudents(int teacherId)
         {
-            throw new NotImplementedException();
+            var students = await _context.Students.Where(s => s.TeacherId == teacherId).ToListAsync();
+            return _mapper.Map<List<UserDto>>(students);
         }
     }
 }
